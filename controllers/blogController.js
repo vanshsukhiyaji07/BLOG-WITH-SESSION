@@ -1,7 +1,7 @@
 const Blog = require('../models/booktbl');
 const fs = require('fs');
 
-// Show all blogs
+
 const showBlogs = (req, res) => {
     Blog.find({})
         .then(blogs => {
@@ -15,12 +15,11 @@ const showBlogs = (req, res) => {
         });
 };
 
-// Show add blog form
+
 const showAddBlog = (req, res) => {
     res.render('form');
 };
 
-// Add new blog
 const addBlog = (req, res) => {
     const { title, content, updateId } = req.body;
 
@@ -80,7 +79,7 @@ const addBlog = (req, res) => {
     }
 };
 
-// Show update blog form
+
 const showUpdateBlog = (req, res) => {
     let updateId = req.query.updateId;
     if (!updateId) {
@@ -99,7 +98,7 @@ const showUpdateBlog = (req, res) => {
         });
 };
 
-// Delete blog
+
 const deleteBlog = (req, res) => {
     let deleteId = req.params.id;
     if (!deleteId) {
@@ -130,7 +129,7 @@ const deleteBlog = (req, res) => {
         });
 };
 
-// Show single blog
+
 const showSingleBlog = (req, res) => {
     Blog.findById(req.params.id)
         .then(blog => {
