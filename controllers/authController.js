@@ -1,12 +1,12 @@
 const User = require('../models/user');
 const passport = require('passport');
 
-// Show signup form
+
 module.exports.showSignup = (req, res) => {
     res.render('signup', { error: null });
 };
 
-// Handle signup
+
 module.exports.signup = async (req, res) => {
     const { username, password } = req.body;
     console.log('Signup attempt:', { username, password: password ? '***' : 'missing' });
@@ -18,12 +18,11 @@ module.exports.signup = async (req, res) => {
             return res.render('signup', { error: 'Username already exists' });
         }
         
-        // Create new user
+      
         const user = new User({ username, password });
         await user.save();
         console.log('User created successfully:', username);
-        
-        // Log in the user after successful signup
+      
         req.login(user, (err) => {
             if (err) {
                 console.error('Login error after signup:', err);
@@ -38,12 +37,12 @@ module.exports.signup = async (req, res) => {
     }
 };
 
-// Show login form
+
 module.exports.showLogin = (req, res) => {
     res.render('login', { error: null });
 };
 
-// Handle login using Passport
+
 module.exports.login = (req, res, next) => {
     const { username, password } = req.body;
     console.log('Login attempt:', { username, password: password ? '***' : 'missing' });
@@ -69,7 +68,7 @@ module.exports.login = (req, res, next) => {
     })(req, res, next);
 };
 
-// Handle logout
+
 module.exports.logout = (req, res) => {
     req.logout((err) => {
         if (err) {
@@ -79,4 +78,4 @@ module.exports.logout = (req, res) => {
     });
 };
 
-// Export all controller functions as an object
+
