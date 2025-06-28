@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Multer configuration
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Blog routes - require authentication for home page
+
 router.get('/', isAuthenticated, blogController.showBlogs);
 router.get('/add', isAuthenticated, blogController.showAddBlog);
 router.post('/add', isAuthenticated, upload.single('image'), blogController.addBlog);
